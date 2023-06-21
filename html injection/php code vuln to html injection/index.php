@@ -1,8 +1,3 @@
-<?php
-  $userInput = $_POST['userInput'];
-  $output = "<div>" . $userInput . "</div>";
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +5,12 @@
 </head>
 <body>
   <h1>HTML Injection Example</h1>
-  
+  <?php
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $userInput = $_POST['userInput'];
+    $output = "<div>" . $userInput . "</div>";
+  }
+  ?>
   <form method="POST" action="">
     <label for="userInput">Enter your message:</label>
     <input type="text" id="userInput" name="userInput">
@@ -18,7 +18,8 @@
   </form>
   
   <div id="outputContainer">
-    <?php echo $output; ?>
+    <?php echo isset($output) ? $output : ''; ?>
   </div>
 </body>
 </html>
+//HELLO
